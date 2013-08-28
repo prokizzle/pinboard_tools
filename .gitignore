@@ -12,6 +12,9 @@ doc
 # bundler
 .bundle
 
+# config files
+.yml
+
 # jeweler generated
 pkg
 
