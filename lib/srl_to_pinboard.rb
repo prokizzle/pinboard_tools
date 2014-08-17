@@ -30,6 +30,7 @@ module PinboardTools
 
       input.scan(/(http.+){/).each do |url|
         links.push url.first
+
         # p link
       end
 
@@ -41,7 +42,7 @@ module PinboardTools
 
           article = {
             url: url,
-            description: meta[:title],  
+            description: meta[:title],
             extended: meta[:excerpt],
             tags: meta[:keywords],
             replace: true,
@@ -55,7 +56,7 @@ module PinboardTools
 
         bar.increment!
       end
-      clear_list = %x{touch ~/Library/Safari/Bookmarks.plist}
+      clear_list = %x{cp -R ~/dev/pinboard_tools/lib/Bookmarks.plist ~/Library/Safari/Bookmarks.plist}
     end
   end
 end
