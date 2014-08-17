@@ -2,12 +2,45 @@
 
 require_relative '../lib/pinboard_tagger'
 require_relative '../lib/srl_to_pinboard'
+require 'dotenv'
+Dotenv.load
+require "docopt"
+doc = <<DOCOPT
+LazyCupid
 
-case ARGV[0]
-when "-t"
-	tagger = PinboardTools::Tagger.new(tag: ARGV[1].to_s)
-	tagger.run
-when "-s"
-	import = PinboardTools::SafariReadingListImporter.new
-	import.run
+Usage:
+  #{__FILE__} [-t <tag>] [-s] [-v]
+  #{__FILE__} config
+  #{__FILE__} safari-import
+
+
+
+  Options:
+  	-h --help     		Show this screen.
+  	--version     		Show version.
+  	-t=<tag>  				tags to target
+		-s 							  import safari reading list
+		-v           			Show console output
+
+DOCOPT
+
+begin
+  options = Docopt::docopt(doc)
+  puts options
+  if options["-t"]
+    tags = options["<tag>"]
+
+
+    verbose = options["-v"]
+
+    tagger = PinboardTools::Tagger.new(tag: tags, verbose: verbose)
+    tagger.run
+  elsif options["-s"]
+    import = PinboardTools::SafariReadingListImporter.new
+    import.run
+  end
+rescue Interrupt, SystemExit
+  print "\rShutting down..."
 end
+
+print "\nGoodbye!"
