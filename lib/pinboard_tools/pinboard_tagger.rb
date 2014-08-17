@@ -73,7 +73,11 @@ module PinboardTools
           pinboard.posts(tag: t).each {|p| posts << p}
         end
       else
-        posts = pinboard.posts(:tag => @_tag) rescue nil
+        begin
+        posts = pinboard.posts(:tag => @_tag)
+      rescue Exception => e
+        posts = pinboard.posts
+      end
       end
       # else
       # posts = pinboard.posts(:results => 10)
