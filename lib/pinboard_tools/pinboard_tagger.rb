@@ -22,7 +22,7 @@ module PinboardTools
     attr_reader :pb_user, :pb_pass, :pinboard
 
     def initialize(args)
-      config_path = File.expand_path("../../config/pinboard.yml", __FILE__)
+      config_path = File.expand_path("../../../config/pinboard.yml", __FILE__)
       @config = YAML.load_file(config_path)
       @embedly_key = @config[:embedly_key].to_s
       @pb_user = @config[:pinboard_user]
@@ -92,8 +92,7 @@ module PinboardTools
           :toread => true,
           :type => post_metadata[:type]
         }
-        if post_metadata[:error_code] == 404
-          pinboard.delete(post.href)
+        pinboard.delete(post.href)
         elsif params[:type] != "html"
           pinboard.add(url: post.href, tags: [params[:type]], description: post.href)
         else
