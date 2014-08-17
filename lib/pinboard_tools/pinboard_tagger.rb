@@ -15,14 +15,14 @@ end
 module PinboardTools
 
   # Replaces keywords on select Pinboard articles via Embed.ly
-  # 
+  #
   # @param tag [Symbol] defines a string tag for tagger to filter articles by
-  # 
+  #
   class Tagger
     attr_reader :pb_user, :pb_pass
 
     def initialize(args)
-      config_path = File.expand_path("../../config/pinboard.yml", __FILE__)
+      config_path = File.expand_path("../../../config/pinboard.yml", __FILE__)
       @config = YAML.load_file(config_path)
       @embedly_key = @config[:embedly_key].to_s
       @pb_user = @config[:pinboard_user]
@@ -33,7 +33,7 @@ module PinboardTools
     end
 
     # Handles downloading new metadata for articles via Embed.ly Extract API
-    # 
+    #
     # @param url [String] URL of article to fetch keywords for
     # @return [Hash] A collection of important metadata tags for article:
     #   keywords [Array] 5 most relevant keywords for article
@@ -69,7 +69,6 @@ module PinboardTools
       posts.reverse_each do |post|
 
         tag_list = Array.new
-        # begin
         post_metadata = get_metadata(post.href)
 
         params = {
@@ -80,9 +79,7 @@ module PinboardTools
           :public => false
         }
         pinboard.add(params) rescue @errors += 1
-        # rescue
-        # end
-        bar.increment!
+        bar.increment! if @verbose
       end
       puts "#{@errors} errors."
     end

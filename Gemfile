@@ -4,4 +4,3 @@ source "http://rubygems.org"
   gem 'nokogiri-plist'
   gem 'embedly'
   gem 'progress_bar'
-  gem 'dotenv'
