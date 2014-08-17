@@ -92,7 +92,8 @@ module PinboardTools
           :toread => true,
           :type => post_metadata[:type]
         }
-        pinboard.delete(post.href)
+        if post_metadata[:error_code] == 404
+          pinboard.delete(post.href)
         elsif params[:type] != "html"
           pinboard.add(url: post.href, tags: [params[:type]], description: post.href)
         else

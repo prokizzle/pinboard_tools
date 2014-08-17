@@ -1,4 +1,5 @@
 require_relative "pinboard_tools/version"
+require 'highline/import'
 
 module PinboardTools
 

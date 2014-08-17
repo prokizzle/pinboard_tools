@@ -7,24 +7,39 @@ LazyCupid
 
 Usage:
   #{__FILE__} [-t <tag>] [-s] [-v]
-  #{__FILE__} config
+  #{__FILE__} init
   #{__FILE__} safari-import
 
 
 
   Options:
-  	-h --help     		Show this screen.
-  	--version     		Show version.
-  	-t=<tag>  				tags to target
-		-s 							  import safari reading list
-		-v           			Show console output
+  -h --help     		Show this screen.
+  --version     		Show version.
+  -t=<tag>  				tags to target
+	-s 							  import safari reading list
+	-v           			Show console output
+	init 					Setup pingboard and Embedly credentials
 
 DOCOPT
 
 begin
   options = Docopt::docopt(doc)
   puts options
-  if options["-t"]
+  if options["init"]
+    say("\nPlease enter your Pinboard credentials")
+    puts ""
+    user    = ask("Pinboard username:   ")
+    pass    = ask("Pinboard password:   ") { |q| q.echo = "*" }
+    embedly = ask("Embedly API key:     ")
+    this = {pinboard_user: user.to_s, pinboard_pass: pass.to_s, embedly_key: embedly.to_s}
+    puts this.to_yaml
+    dir = %x{mkdir -p ../../config}
+    %x{touch ../../config/pinboard.yml}
+    config_path = File.expand_path("../../config/pinboard.yml", __FILE__)
+    File.open(config_path, "w") do |f|
+      f.write(this.to_yaml)
+    end
+  elsif options["-t"]
     tags = options["<tag>"]
 
 

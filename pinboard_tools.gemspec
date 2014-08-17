@@ -22,4 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "nokogiri-plist", "~> 0.5"
   spec.add_dependency "progress_bar", "~> 1.0"
   spec.add_dependency "embedly", "~> 1.8"
+  spec.add_dependency "docopt", "~> 0.5"
+  spec.add_dependency "highline", "~> 1.6"
 end
