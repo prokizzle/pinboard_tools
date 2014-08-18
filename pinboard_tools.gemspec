@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files`.split($/)
   spec.require_paths    = ["lib"]
   spec.bindir = 'bin'
-  spec.executables << 'pinboardtools'
+  spec.executables << 'pinboard_tools'
 
   spec.add_dependency "pinboard", "~> 0.1"
   spec.add_dependency "nokogiri-plist", "~> 0.5"
