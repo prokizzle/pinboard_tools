@@ -9,27 +9,29 @@ Usage:
   #{__FILE__} tag [<tag>] [-v]
   #{__FILE__} init
   #{__FILE__} -s [-v]
-  #{__FILE__} safari-import
+  #{__FILE__} safari
 
   Options:
-  -h  			Show this screen.
-  --version  		Show version.
-  tag=<tag>  		tags to target.
-	-s  		import safari reading list.
-	-v  		Show console output.
-	init  		Setup pingboard and Embedly credentials.
+  -h        Show this screen.
+  --version     Show version.
+  tag=<tag>     tags to target for re-tagging.
+  safari      import safari reading list.
+  -v      Show console output.
+  init      Setup pingboard and Embedly credentials.
 
 DOCOPT
 
 
 begin
   begin
-  options = Docopt::docopt(doc)
+    options = Docopt::docopt(doc)
   rescue Exception => e
     puts e.message
     exit
   end
-  puts options
+  # puts options
+  verbose = options["-v"]
+
   if options["-h"]
     require "pp"
     pp Docopt::docopt(doc)
@@ -47,14 +49,10 @@ begin
     end
   elsif options["tag"]
     tags = options["<tag>"]
-
-
-    verbose = options["-v"]
-
     tagger = PinboardTools::Tagger.new(tag: tags, verbose: verbose)
     tagger.run
-  elsif options["-s"]
-    import = PinboardTools::SafariReadingListImporter.new
+  elsif options["-s"] || options["safari"]
+    import = PinboardTools::SafariReadingListImporter.new(verbose: verbose)
     import.run
   end
 rescue Interrupt, SystemExit
