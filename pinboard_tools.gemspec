@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["nick@prokes.ch"]
   spec.summary       = %q{a helpful organizer for your existing Pinboard bookmarks}
   spec.description   = %q{Auto-tagger with embedly support, safari reading list importer, dead link remover}
-  spec.homepage      = "http://nick.prokes.ch"
+  spec.homepage      = "https://github.com/prokizzle/pinboard_tools"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
