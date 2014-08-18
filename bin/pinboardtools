@@ -23,7 +23,12 @@ DOCOPT
 
 
 begin
+  begin
   options = Docopt::docopt(doc)
+  rescue Exception => e
+    puts e.message
+    exit
+  end
   puts options
   if options["-h"]
     require "pp"
