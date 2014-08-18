@@ -6,10 +6,9 @@ doc = <<DOCOPT
 LazyCupid
 
 Usage:
-  #{__FILE__} tag [<tag>] [-v]
   #{__FILE__} init
-  #{__FILE__} -s [-v]
-  #{__FILE__} safari
+  #{__FILE__} tag [<tag>] [-v]
+  #{__FILE__} safari [-v]
 
   Options:
   -h        Show this screen.
