@@ -7,7 +7,7 @@ Pinboard Tools is a helpful organizer for your existing [Pinboard](http://www.pi
 ## Code Example
 
     |2.0.0-p0| giggy in ~/dev/pinboard_tools    
-    $  pinboard tag fever
+    $  pinboard_tools tag fever
     => [##########################################################] [1/1] [100.00%] [00:03] [00:00] [0.32/s]
 
 
@@ -32,7 +32,7 @@ Install the gem
 
 To configure, run the `init` command to store your Pinboard login and Embedly API token
   
-      pinboardtools init
+      pinboard_tools init
 
 You will be prompted for you [pinboard][7071-003] username and password, as well as your [Embedly][7071-001] API key. 
  
@@ -43,15 +43,17 @@ You will be prompted for you [pinboard][7071-003] username and password, as well
 
 ## Usage
 
-    pinboardtools <command> <argument>
+    pinboard_tools <command> <argument>
    
  Pinboard Tools accepts two arguments. 
  
-     pinboardtools safari [-v]
+     pinboard_tools safari [-v]
 Runs the Safari Reading List import to Pinboard task. This will parse your Reading List plist file, extract resolvable URLs, use Embedly to determine the correct metadata, and add each item to Pinboard. Once complete, it will clear out the Reading List to prevent duplicate tasks and minimize future Embedly API usage. 
 
-    pinboardtools tag [optional tag name]
+    pinboardtools tag [optional tag name] [-v]
  Runs the pinboard re-tagger task. When run without a tag name, it will process every article you saved to Pinboard. If you specify a tag (case sensitive), it will process every article that has that tag, and replace the metadata of the item with Embedly data. 
+
+ Adding the `-v` option to either command will display a progress bar for the parsing queue.
 
 ## Tests
 
