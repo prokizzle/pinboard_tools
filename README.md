@@ -6,8 +6,8 @@ Pinboard Tools is a helpful organizer for your existing [Pinboard](http://www.pi
 
 ## Code Example
 
-    |2.0.0-p0| giggy in ~/dev/pinboard_tagger    
-    $  rb lib/pinboard_tagger.rb fever 
+    |2.0.0-p0| giggy in ~/dev/pinboard_tools    
+    $  pinboard tag fever
     => [##########################################################] [1/1] [100.00%] [00:03] [00:00] [0.32/s]
 
 
@@ -26,40 +26,32 @@ You will need:
 * A [Pinboard][7071-003] account
 * An [Embedly API ][7071-001] key (free for 5000 requests per month)
 
-Clone the project onto your computer
+Install the gem
 
-    git clone url
+    gem install pinboard_tools
 
-To install, you will need the `bundler`gem. 
-
-    [sudo] gem install bundler
- 
- Then run [bundler][7071-004]. 
- 
-     bundle install
-     
-  To configure, I've made it easy to setup your config file with a rake task. Simply enter:
+To configure, run the `init` command to store your Pinboard login and Embedly API token
   
-      rake pinboard:login
+      pinboardtools init
 
 You will be prompted for you [pinboard][7071-003] username and password, as well as your [Embedly][7071-001] API key. 
  
-*  I have only tested against Ruby 2.0.0
+*  I have only tested against Ruby 2.1.1
   
     
   
 
 ## Usage
 
-    ruby bin/pinboardtools
+    pinboardtools <command> <argument>
    
  Pinboard Tools accepts two arguments. 
  
-     pinboardtools -s
+     pinboardtools safari [-v]
 Runs the Safari Reading List import to Pinboard task. This will parse your Reading List plist file, extract resolvable URLs, use Embedly to determine the correct metadata, and add each item to Pinboard. Once complete, it will clear out the Reading List to prevent duplicate tasks and minimize future Embedly API usage. 
 
-    pinboardtools -t [optional tag name]
- Runs the pinboard re-tagger task. When run without a tag name, it will process the ten most recent articles you saved to Pinboard. If you specify a tag (case sensitive), it will process every article that has that tag, and replace the metadata of the item with Embedly data. 
+    pinboardtools tag [optional tag name]
+ Runs the pinboard re-tagger task. When run without a tag name, it will process every article you saved to Pinboard. If you specify a tag (case sensitive), it will process every article that has that tag, and replace the metadata of the item with Embedly data. 
 
 ## Tests
 
