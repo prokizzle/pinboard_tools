@@ -18,8 +18,8 @@ module PinboardTools
   class SafariReadingListImporter
     attr_accessor :tagger
 
-    def initialize
-      @tagger = Tagger.new(tag: nil)
+    def initialize(args)
+      @tagger = Tagger.new(tag: nil, verbose: args[:verbose])
     end
 
     def run

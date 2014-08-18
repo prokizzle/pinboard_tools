@@ -10,13 +10,13 @@ Gem::Specification.new do |spec|
   spec.email         = ["nick@prokes.ch"]
   spec.summary       = %q{a helpful organizer for your existing Pinboard bookmarks}
   spec.description   = %q{Auto-tagger with embedly support, safari reading list importer, dead link remover}
-  spec.homepage      = "http://nick.prokes.ch"
+  spec.homepage      = "https://github.com/prokizzle/pinboard_tools"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
   spec.require_paths    = ["lib"]
   spec.bindir = 'bin'
-  spec.executables << 'pinboardtools'
+  spec.executables << 'pinboard_tools'
 
   spec.add_dependency "pinboard", "~> 0.1"
   spec.add_dependency "nokogiri-plist", "~> 0.5"

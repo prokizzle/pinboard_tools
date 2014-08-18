@@ -24,9 +24,14 @@ module PinboardTools
     def initialize(args)
       config_path = File.expand_path("../../../config/pinboard.yml", __FILE__)
       @config = YAML.load_file(config_path)
-      @embedly_key = @config[:embedly_key].to_s
-      @pb_user = @config[:pinboard_user]
-      @pb_pass = @config[:pinboard_pass]
+      begin
+        @embedly_key = @config[:embedly_key].to_s
+        @pb_user = @config[:pinboard_user]
+        @pb_pass = @config[:pinboard_pass]
+      rescue
+        puts "Credentials not found. Please run `pinboardtools init`"
+        exit
+      end
       @errors = 0
       # @_tag = Array.new
       @_tag = args[:tag]
@@ -73,7 +78,11 @@ module PinboardTools
           pinboard.posts(tag: t).each {|p| posts << p}
         end
       else
-        posts = pinboard.posts(:tag => @_tag) rescue nil
+        begin
+          posts = pinboard.posts(:tag => @_tag)
+        rescue Exception => e
+          posts = pinboard.posts
+        end
       end
       # else
       # posts = pinboard.posts(:results => 10)
